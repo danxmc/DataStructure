@@ -95,15 +95,15 @@ public class linkedList<T> {
      * Elimina de la lista el nodo que contenga el dato ingresado (si existe)
      * @param data, la informacion del nodo
      */
-    public void eNode(T data) {
+    public boolean eNode(T data) {
         Node aux;
-        System.out.print("El nodo con la informacion '" + data + "' fue borrado: ");
         
         if (isEmpty()) {
-            System.out.print(false + "\n");
+            System.out.println("Lista vacia");
+            return false;
         } else if (first.getData() == data) {
             eFirst();
-            System.out.print(true + "\n");
+            System.out.println("Nodo borrado");
         } else {
             aux = first;
             
@@ -113,11 +113,12 @@ public class linkedList<T> {
             
             if (aux.getNext().getData() == data && aux.getNext() != null) {
                 aux.setNext(aux.getNext().getNext());
-                System.out.print(true + "\n");
             } else {
-                System.out.print(false + "\n");
+                System.out.println("Nodo no encontrado");
+                return false;
             }
         }
+        return true;
     }
 
     private boolean isEmpty() {

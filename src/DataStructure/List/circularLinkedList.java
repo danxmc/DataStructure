@@ -38,14 +38,15 @@ public class circularLinkedList<T> {
         return pivot == null;
     }
 
-    protected void eNode(T d) {
+    protected boolean eNode(T d) {
         if (isEmpty()) {
             System.out.println("Lista vacia");
+            return false;
         } else if (findLast().getNext().getData() == d) {//Si el dato esta en el pivote
             Node aux = findLast();
             aux.setNext(aux.getNext().getNext());//El apuntador anterior ahora apunta al siguiente nodo del pivote
             pivot = aux.getNext();//El pivote ahora es el sigueinte nodo del anterior pivote
-            System.out.println("Dato '" + d + "' eliminado");
+            System.out.println("Nodo eliminado");
         } else { //Si el dato no esta en el pivote
             Node aux = pivot;
             while (aux.getNext().getData() != d && aux.getNext() != pivot) {
@@ -53,11 +54,13 @@ public class circularLinkedList<T> {
             }
             if (aux.getNext().getData() == d) {
                 aux.setNext(aux.getNext().getNext());
-                System.out.println("Dato '" + d + "' eliminado");
+                System.out.println("Nodo eliminado");
             } else {
-                System.out.println("No se encontro el dato");
+                System.out.println("No se encontro el Nodo");
+                return false;
             }
         }
+        return true;
     }
 
     private Node findLast() {
