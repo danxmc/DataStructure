@@ -121,10 +121,17 @@ public class linkedList<T> {
         return true;
     }
 
+    /**
+     * 
+     * @return boolean the state of the list empty or full
+     */
     private boolean isEmpty() {
         return (first == null && last == null);
     }
 
+    /**
+     * Method to print the list
+     */
     public void showList() {
         if (isEmpty() == false) {
             Node aux = first;
