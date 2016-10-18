@@ -5,6 +5,8 @@
  */
 package DataStructure.List;
 
+import DataStructure.Node.nodeDLL;
+
 /**
  *
  * @author danx_

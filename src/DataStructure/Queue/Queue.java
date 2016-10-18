@@ -5,6 +5,8 @@
  */
 package DataStructure.Queue;
 
+import DataStructure.Node.Node;
+
 /**
  *
  * @author danx_

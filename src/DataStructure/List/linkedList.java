@@ -5,6 +5,8 @@
  */
 package DataStructure.List;
 
+import DataStructure.Node.Node;
+
 /**
  *
  * @author danx_
@@ -12,8 +14,8 @@ package DataStructure.List;
 public class linkedList<T> {
 
     //Atributes
-    protected nodeLL first;
-    protected nodeLL last;
+    protected Node first;
+    protected Node last;
 
     //Methods
     //Constructor
@@ -27,7 +29,7 @@ public class linkedList<T> {
      * @param n, el dato del nodo
      */
     public void insertFirst(T n) {
-        nodeLL node = new nodeLL(n);
+        Node node = new Node(n);
         if (isEmpty()) {
             first = node;
             last = node;
@@ -43,7 +45,7 @@ public class linkedList<T> {
      * @param n, el dato del nodo
      */
     public void iLast(T n) {
-        nodeLL node = new nodeLL(n);
+        Node node = new Node(n);
         if (isEmpty()) {
             first = node;
             last = node;
@@ -64,7 +66,7 @@ public class linkedList<T> {
             first = null;
             last = null;
         } else {
-            nodeLL aux = first;
+            Node aux = first;
             while (aux.getNext() != last) {
                 aux = aux.getNext();
             }
@@ -84,7 +86,7 @@ public class linkedList<T> {
             first = null;
             last = null;
         } else {
-            nodeLL aux = first;
+            Node aux = first;
             first = aux.getNext();
         }
     }
@@ -94,7 +96,7 @@ public class linkedList<T> {
      * @param data, la informacion del nodo
      */
     public void eNode(T data) {
-        nodeLL aux;
+        Node aux;
         System.out.print("El nodo con la informacion '" + data + "' fue borrado: ");
         
         if (isEmpty()) {
@@ -124,7 +126,7 @@ public class linkedList<T> {
 
     public void showList() {
         if (isEmpty() == false) {
-            nodeLL aux = first;
+            Node aux = first;
             while (aux != null) {
                 System.out.print("[" + aux.getData() + "]->");
                 aux = aux.getNext();

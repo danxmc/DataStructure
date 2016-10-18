@@ -5,13 +5,15 @@
  */
 package DataStructure.List;
 
+import DataStructure.Node.Node;
+
 /**
  *
  * @author danx_
  */
 public class circularLinkedList<T> {
     //Atributes
-    private nodeLL pivot;
+    private Node pivot;
 
     //Constructor
     public circularLinkedList() {
@@ -19,7 +21,7 @@ public class circularLinkedList<T> {
     }
 
     protected void insert(T d) {
-        nodeLL node = new nodeLL(d);
+        Node node = new Node(d);
         if (!isEmpty()) {//Si la lista no esta vacia
             //Inserta el nodo al inicio y recorremos los nodos
             node.setNext(pivot);
@@ -40,12 +42,12 @@ public class circularLinkedList<T> {
         if (isEmpty()) {
             System.out.println("Lista vacia");
         } else if (findLast().getNext().getData() == d) {//Si el dato esta en el pivote
-            nodeLL aux = findLast();
+            Node aux = findLast();
             aux.setNext(aux.getNext().getNext());//El apuntador anterior ahora apunta al siguiente nodo del pivote
             pivot = aux.getNext();//El pivote ahora es el sigueinte nodo del anterior pivote
             System.out.println("Dato '" + d + "' eliminado");
         } else { //Si el dato no esta en el pivote
-            nodeLL aux = pivot;
+            Node aux = pivot;
             while (aux.getNext().getData() != d && aux.getNext() != pivot) {
                 aux = aux.getNext();
             }
@@ -58,16 +60,16 @@ public class circularLinkedList<T> {
         }
     }
 
-    private nodeLL findLast() {
-        nodeLL aux = pivot;
+    private Node findLast() {
+        Node aux = pivot;
         while (aux.getNext() != pivot) {
             aux = aux.getNext();
         }
         return aux;
     }
 
-    protected nodeLL searchNode(T d) {
-        nodeLL aux = pivot;
+    protected Node searchNode(T d) {
+        Node aux = pivot;
         do {
             if (aux.getData() == d) {
                 return aux;
@@ -82,7 +84,7 @@ public class circularLinkedList<T> {
         if (isEmpty()) {
             System.out.println("Lista vacia");
         } else {
-            nodeLL aux = pivot;
+            Node aux = pivot;
             System.out.print("[" + aux.getData() + "] ");
             while (aux.getNext() != pivot) {
                 System.out.print("[" + aux.getNext().getData() + "] ");
