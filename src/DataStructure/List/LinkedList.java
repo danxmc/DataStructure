@@ -44,7 +44,7 @@ public class LinkedList<T> {
      *
      * @param n, el dato del nodo
      */
-    public void iLast(T n) {
+    public void insertLast(T n) {
         Node node = new Node(n);
         if (isEmpty()) {
             first = node;
@@ -93,36 +93,42 @@ public class LinkedList<T> {
 
     /**
      * Elimina de la lista el nodo que contenga el dato ingresado (si existe)
+     *
      * @param data, la informacion del nodo
      */
     public boolean eNode(T data) {
         Node aux;
-        
+
         if (isEmpty()) {
             System.out.println("Lista vacia");
             return false;
         } else if (first.getData() == data) {
             eFirst();
             System.out.println("Nodo borrado");
+        } else if (last.getData() == data) {
+            eLast();
+            System.out.println("Nodo borrado");
         } else {
             aux = first;
-            
-            while (aux.getNext().getData() != data && aux.getNext() != null) { //Mientras que no encuentre el dato y no llegue al final de la lista. recorre la lista
-                aux = aux.getNext();
-            }
-            
-            if (aux.getNext().getData() == data && aux.getNext() != null) {
-                aux.setNext(aux.getNext().getNext());
-            } else {
+
+            try {
+                while (aux.getNext().getData() != data) { //Mientras que no encuentre el dato y no llegue al final de la lista. recorre la lista
+                    aux = aux.getNext();
+                }
+            } catch (NullPointerException e) {
                 System.out.println("Nodo no encontrado");
                 return false;
             }
+
+            if (aux.getNext().getData() == data && aux.getNext() != null) {
+                aux.setNext(aux.getNext().getNext());
+            }       
         }
         return true;
     }
 
     /**
-     * 
+     *
      * @return boolean the state of the list empty or full
      */
     private boolean isEmpty() {
@@ -139,6 +145,7 @@ public class LinkedList<T> {
                 System.out.print("[" + aux.getData() + "]->");
                 aux = aux.getNext();
             }
+            System.out.print("null\n");
         }
     }
 }

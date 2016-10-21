@@ -20,7 +20,7 @@ public class CircularLinkedList<T> {
         pivot = null;
     }
 
-    protected void insert(T d) {
+    public void insert(T d) {
         Node node = new Node(d);
         if (!isEmpty()) {//Si la lista no esta vacia
             //Inserta el nodo al inicio y recorremos los nodos
@@ -38,7 +38,7 @@ public class CircularLinkedList<T> {
         return pivot == null;
     }
 
-    protected boolean eNode(T d) {
+    public boolean eNode(T d) {
         if (isEmpty()) {
             System.out.println("Lista vacia");
             return false;
@@ -71,7 +71,7 @@ public class CircularLinkedList<T> {
         return aux;
     }
 
-    protected Node searchNode(T d) {
+    public Node searchNode(T d) {
         Node aux = pivot;
         do {
             if (aux.getData() == d) {
@@ -83,14 +83,14 @@ public class CircularLinkedList<T> {
         return null;
     }
 
-    protected void showList() {
+    public void showList() {
         if (isEmpty()) {
             System.out.println("Lista vacia");
         } else {
             Node aux = pivot;
-            System.out.print("[" + aux.getData() + "] ");
+            System.out.print("[" + aux.getData() + "]->");
             while (aux.getNext() != pivot) {
-                System.out.print("[" + aux.getNext().getData() + "] ");
+                System.out.print("[" + aux.getNext().getData() + "]->");
                 aux = aux.getNext();
             }
             System.out.println("");

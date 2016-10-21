@@ -77,14 +77,20 @@ public class DoublyLinkedList<T> {
             return null; //Si esta vacio regresa vacio
         } else { //Si contiene elementos
             aux = first; //Se inicializa el auxiliar al principio de la lista
-            while (aux.getData() != data && aux != null) { //Mientras que no se encuentre el dato, o no llegue al final de la lista
-                if (aux.getData() == data) { //Se retorna el apuntador si lo que contiene es igual al dato buscado
-                    return aux;
+            
+            try {
+                while (aux.getData() != data /*&& aux != null*/) { //Mientras que no se encuentre el dato, o no llegue al final de la lista
+                    aux = aux.getNext();
                 }
+            } catch (NullPointerException e) {
+                return null;
             }
-            //Se retorna null
-            return null;
+            if (aux.getData() == data) { //Se retorna el apuntador si lo que contiene es igual al dato buscado
+                return aux;
+            }
         }
+        //Se retorna null
+        return null;
     }
 
     /**
@@ -95,12 +101,12 @@ public class DoublyLinkedList<T> {
     public boolean eNode(T data) {
         NodeDLL aux = searchNode(data);//Llama al method searchNode, para saber el pointer donde esta data
         if (aux == null) {//si es null, devuelve falso
-            System.out.println("No se encontro el nodo");
+            System.out.println("Nodo no encontrado");
             return false;
         } else if (aux == first) {//Si el pointer es al principio, manda llamar al method eFirst
-            eNodeFirst();
+            eFirst();
         } else if (aux == last) {//Si el pointer es al final, manda llamar al method eLast
-            eNodeLast();
+            eLast();
         } else {//Si el pointer es enmedio
             aux.getNext().setPrev(aux.getPrev());//Se cambia el apuntador del nodo anterior para que apunte a uno despues del nodo actual
             aux.getPrev().setNext(aux.getNext());//Se cambia el apuntar del nodo siguiente para que apunte a uno antes del actual
@@ -111,7 +117,7 @@ public class DoublyLinkedList<T> {
     /**
      * Ignora el primer nodo de la lista
      */
-    public void eNodeFirst() { //Corremos el primero un espacio adelante
+    public void eFirst() { //Corremos el primero un espacio adelante
         first = first.getNext();
         first.setPrev(null);
     }
@@ -120,7 +126,7 @@ public class DoublyLinkedList<T> {
      * Ignora el ultimo nodo de la lista
      *
      */
-    public void eNodeLast() { //Corremos el ultimo un espacio atras
+    public void eLast() { //Corremos el ultimo un espacio atras
         last = last.getPrev();
         last.setNext(null);
     }
@@ -131,13 +137,14 @@ public class DoublyLinkedList<T> {
     public void showList() {
         if (isEmpty()) {//Si la lista esta vacia, imprime emoticon
             System.out.println("Lista vacia ☠");
-        } else {//Recorre los nodos, des de first hasta fin, y los imprime
+        } else {//Recorre los nodos, desde first hasta fin, y los imprime
             NodeDLL aux = first;
+            System.out.print("null<->");
             while (aux != null) {
-                System.out.print("[" + aux.getData() + "]->");
+                System.out.print("[" + aux.getData() + "]<->");
                 aux = aux.getNext();
             }
-            System.out.println("");
+            System.out.print("null\n");
         }
     }
 
@@ -149,11 +156,12 @@ public class DoublyLinkedList<T> {
             System.out.println("Lista vacia ☠");
         } else {//Recorre los nodos de last a first, y los imprime
             NodeDLL aux = last;
+            System.out.print("null<->");
             while (aux != null) {
-                System.out.print("[" + aux.getData() + "]->");
+                System.out.print("[" + aux.getData() + "]<->");
                 aux = aux.getPrev();
             }
-            System.out.println("");
+            System.out.print("null\n");
         }
     }
 }
