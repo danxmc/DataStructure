@@ -28,8 +28,7 @@ class SStack {
     public void showStack() {
         for (int i = stack.length - 1; i >= 0; i--) {
             System.out.println("[" + stack[i] + "}");
-            System.out.println("|");
-            System.out.println("V");
+            System.out.println("↓");
         }
         System.out.println("null\n");
     }

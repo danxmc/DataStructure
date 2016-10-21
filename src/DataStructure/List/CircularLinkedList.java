@@ -88,9 +88,9 @@ public class CircularLinkedList<T> {
             System.out.println("Lista vacia");
         } else {
             Node aux = pivot;
-            System.out.print("[" + aux.getData() + "]->");
+            System.out.print("[" + aux.getData() + "]→");
             while (aux.getNext() != pivot) {
-                System.out.print("[" + aux.getNext().getData() + "]->");
+                System.out.print("[" + aux.getNext().getData() + "]→");
                 aux = aux.getNext();
             }
             System.out.println("");

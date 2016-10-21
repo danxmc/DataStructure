@@ -85,7 +85,7 @@ public class Stack<T> {
         } else {
             
             while (aux.getNext() != null) {
-                System.out.println("[" + aux.getData() + "]\n|\nV");
+                System.out.println("[" + aux.getData() + "]\n↓");
                 aux = aux.getNext();
             }
             

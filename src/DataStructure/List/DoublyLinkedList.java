@@ -139,9 +139,9 @@ public class DoublyLinkedList<T> {
             System.out.println("Lista vacia ☠");
         } else {//Recorre los nodos, desde first hasta fin, y los imprime
             NodeDLL aux = first;
-            System.out.print("null<->");
+            System.out.print("null↔");
             while (aux != null) {
-                System.out.print("[" + aux.getData() + "]<->");
+                System.out.print("[" + aux.getData() + "]↔");
                 aux = aux.getNext();
             }
             System.out.print("null\n");
@@ -156,9 +156,9 @@ public class DoublyLinkedList<T> {
             System.out.println("Lista vacia ☠");
         } else {//Recorre los nodos de last a first, y los imprime
             NodeDLL aux = last;
-            System.out.print("null<->");
+            System.out.print("null↔");
             while (aux != null) {
-                System.out.print("[" + aux.getData() + "]<->");
+                System.out.print("[" + aux.getData() + "]↔");
                 aux = aux.getPrev();
             }
             System.out.print("null\n");

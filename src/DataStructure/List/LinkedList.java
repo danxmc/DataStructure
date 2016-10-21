@@ -142,7 +142,7 @@ public class LinkedList<T> {
         if (isEmpty() == false) {
             Node aux = first;
             while (aux != null) {
-                System.out.print("[" + aux.getData() + "]->");
+                System.out.print("[" + aux.getData() + "]→");
                 aux = aux.getNext();
             }
             System.out.print("null\n");
