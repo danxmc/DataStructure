@@ -13,12 +13,13 @@ import java.util.Arrays;
 class SStack {
 
     //Atributes
-    String[] stack = new String[15];
+    String[] stack;
     private int size = 0;
 
     //Methods
     //Constructor
-    public SStack() {
+    public SStack(int n) {
+        stack = new String[n];
     }
 
     /**
