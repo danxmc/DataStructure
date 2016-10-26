@@ -12,6 +12,7 @@ import DataStructure.Node.Node;
  * @author danx_
  */
 public class CircularLinkedList<T> {
+
     //Atributes
     private Node pivot;
 
@@ -63,6 +64,23 @@ public class CircularLinkedList<T> {
         return true;
     }
 
+    public boolean eNodeNumber(int n) {
+        Node aux = pivot;
+        if (n == 1) {
+            aux = findLast();
+            aux.setNext(aux.getNext().getNext());//El apuntador anterior ahora apunta al siguiente nodo del pivote
+            pivot = aux.getNext();//El pivote ahora es el sigueinte nodo del anterior pivote
+            System.out.println("Nodo eliminado");
+        } else {
+            for (int i = 1; i < n - 1; i++) {
+                aux = aux.getNext();
+            }
+            aux.setNext(aux.getNext().getNext());
+            System.out.println("Nodo eliminado");
+        }
+        return true;
+    }
+
     private Node findLast() {
         Node aux = pivot;
         while (aux.getNext() != pivot) {
@@ -81,6 +99,18 @@ public class CircularLinkedList<T> {
             }
         } while (aux != pivot || aux.getData() != d);
         return null;
+    }
+
+    public Node searchNodeNumber(int n) {
+        Node aux = pivot;
+        if (n == 1) {
+            return aux;
+        } else {
+            for (int i = 1; i <= n - 1; i++) {
+                aux = aux.getNext();
+            }
+            return aux;
+        }
     }
 
     public void showList() {
