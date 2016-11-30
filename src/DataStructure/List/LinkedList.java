@@ -6,6 +6,7 @@
 package DataStructure.List;
 
 import DataStructure.Node.Node;
+import java.util.Scanner;
 
 /**
  *
@@ -13,139 +14,213 @@ import DataStructure.Node.Node;
  */
 public class LinkedList<T> {
 
-    //Atributes
-    protected Node first;
-    protected Node last;
-
-    //Methods
-    //Constructor
-    public LinkedList() {
-
-    }
-
+   private Node first;
+    private Node last;
+    private Node move;
+    private int elements;
+    
     /**
-     * Inserta al inicio de la lista un nuevo nodo
-     *
-     * @param n, el dato del nodo
+     * Constructor
      */
-    public void insertFirst(T n) {
-        Node node = new Node(n);
-        if (isEmpty()) {
-            first = node;
-            last = node;
-        } else {
-            node.setNext(first);
-            first = node;
-        }
+    public LinkedList (){
+        this.first=null;
+        this.last=null;
     }
-
+    
     /**
-     * Inserta al final de la lista un nuevo nodo
-     *
-     * @param n, el dato del nodo
+     * ¿Está la lista vacía?
+     * @return true 
      */
-    public void insertLast(T n) {
-        Node node = new Node(n);
-        if (isEmpty()) {
-            first = node;
-            last = node;
-        } else {
-            last.setNext(node);
-            last = node;
-        }
+    public boolean isEmpty(){
+        return this.first==null;
     }
-
+    
     /**
-     * Elimina el ultimo nodo de la lista
+     * Inserta un elemento al inicio de la lista.
+     * @param data 
      */
-    public void eLast() {
-        if (isEmpty()) {
-            System.out.println("Lista vacia");
+    public void insertFirst(T data){
+        Node <T> nodo = new Node (data);
+        if (isEmpty()){
+            this.first = nodo;
+            this.last = nodo;
+        }else{
+            nodo.next=this.first;
+            this.first=nodo;
         }
-        if (first == last) {
-            first = null;
-            last = null;
-        } else {
-            Node aux = first;
-            while (aux.getNext() != last) {
-                aux = aux.getNext();
-            }
-            aux.setNext(null);
-            last = aux;
-        }
+        this.elements ++;
     }
-
+    
     /**
-     * Elimina el primer nodo de la lista
+     * Inserta un elemento en la lista.
+     * @param data 
      */
-    public void eFirst() {
-        if (isEmpty()) {
-            System.out.println("Lista vacia");
+    public void insert(T data){
+        Node <T> nodo = new Node (data);
+        if (isEmpty()){
+            this.last = nodo;
+            this.first= nodo;
+        }else{
+            this.last.next = nodo;
+            last=nodo;
         }
-        if (first == last) {
-            first = null;
-            last = null;
-        } else {
-            Node aux = first;
-            first = aux.getNext();
-        }
+        this.elements ++;
     }
-
+    
     /**
-     * Elimina de la lista el nodo que contenga el dato ingresado (si existe)
-     *
-     * @param data, la informacion del nodo
+     * Devuelve la cantidad de lementos de la lista
+     * @return elements
      */
-    public boolean eNode(T data) {
-        Node aux;
-
-        if (isEmpty()) {
-            System.out.println("Lista vacia");
-            return false;
-        } else if (first.getData() == data) {
-            eFirst();
-            System.out.println("Nodo borrado");
-        } else if (last.getData() == data) {
-            eLast();
-            System.out.println("Nodo borrado");
-        } else {
-            aux = first;
-
-            try {
-                while (aux.getNext().getData() != data) { //Mientras que no encuentre el dato y no llegue al final de la lista. recorre la lista
-                    aux = aux.getNext();
+    public int getElements(){
+        return this.elements;
+    }
+    
+    /**
+     * Elimina el elemento indicado en el parámetro
+     * @param data
+     * @return true
+     */
+    public boolean delete (T data){
+        if(!isEmpty()){
+            setFirst();
+            if (move.data.equals(data)){
+                return deleteFirst();
+            }else{
+                while (!move.next.data.equals(data)){
+                    if (move.next!=null){
+                    keepMoving();
+                    }else{
+                        return false;
+                    }
                 }
-            } catch (NullPointerException e) {
-                System.out.println("Nodo no encontrado");
-                return false;
+                move.next=move.next.next;
+                return true;
             }
-
-            if (aux.getNext().getData() == data && aux.getNext() != null) {
-                aux.setNext(aux.getNext().getNext());
-            }       
+        }else{
+            return false;
         }
-        return true;
     }
-
     /**
-     *
-     * @return boolean the state of the list empty or full
+     * Elimina todos los elementos de la lista.
      */
-    private boolean isEmpty() {
-        return (first == null && last == null);
+    public void emptyList(){
+        System.out.print("\033[31mAll the elements will disapear. Are you sure?(Y/N) ");
+        Scanner e = new Scanner(System.in);
+        String r = e.nextLine();
+        if (r.equals("Y") || r.equals("y")){
+            this.first=this.last=this.move=null;
+            this.elements=0;
+            System.out.println("\033[31mDone");
+        }
     }
-
+    
     /**
-     * Method to print the list
+     * Elimina el primer elemento de la lista
+     * @return true
      */
-    public void showList() {
-        if (isEmpty() == false) {
-            Node aux = first;
-            while (aux != null) {
-                System.out.print("[" + aux.getData() + "]→");
-                aux = aux.getNext();
+    public boolean deleteFirst(){
+        if (!isEmpty()){
+            this.first=this.first.next;
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Elimina el último elemento de la lista
+     * @return true
+     */
+    public boolean deleteLast(){
+        if (!isEmpty()){
+            setFirst();
+            while(!this.move.next.equals(this.last)){
+                keepMoving();
             }
-            System.out.print("null\n");
+            last = this.move;
+            last.next = null;
+            return true;
+        }else return false;
+    }
+    
+    /**
+     * Busca un elemento en la lista y lo devuelve
+     * @param data
+     * @return data
+     */
+    public T fetch(T data){
+        if(!isEmpty()){
+            if (last.data.equals(data)){
+                return (T) move.data;
+            }else{
+                setFirst();
+                do{
+                    if (!move.data.equals(data)){
+                         keepMoving();
+                    }else{
+                        return (T) move.data;
+                    } 
+                }while(move != last);
+            }
         }
+        return null;
+    }
+    
+    /**
+     * Ubica al puntero move al inicio de la lista
+     */
+    public void setFirst(){
+        move = this.first;
+    }
+    
+    /**
+     * Evalua si el puntero move está al inicio de la lista
+     * @return true
+     */
+    public boolean isFirst(){
+        return move == this.first;
+    }
+    
+    /**
+     * Ubica el puntero move al final de la lista
+     */
+    public void setLast(){
+        move = this.last;
+    }
+    
+    /**
+     * Evalua si el puntero move está al final de la lista
+     * @return 
+     */
+    public boolean isLast (){
+        return move == this.last;
+    }
+    
+    /**
+     * Mueve el puntero move al siguiente elemento de la lista.
+     */
+    public void keepMoving(){
+        move = move.next;
+    }
+    
+    /**
+     * Devuelve el dato del puntero move
+     * @return data
+     */
+    public T getMove(){
+        return (T) this.move.getData();
+    }
+    
+    @Override
+    public String toString(){
+        if (!isEmpty()){
+            String s="";
+            setFirst();
+            while(move!=null){
+                s += (T) getMove() + "->";
+                
+                keepMoving();
+            }
+            return s+="null";
+        }
+        else return "Lista vacía";
     }
 }

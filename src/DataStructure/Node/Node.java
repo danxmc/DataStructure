@@ -12,8 +12,8 @@ package DataStructure.Node;
 public class Node<T> {
 
     //Atributes
-    private T data;
-    private Node next;
+    public T data;
+    public Node next;
 
     //Methods
     //Constructor
